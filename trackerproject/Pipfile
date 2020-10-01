@@ -5,12 +5,17 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+psycopg2 = "*"
+django = "*"
+djangorestframework = "*"
+pylint-django = "*"
 
 [packages]
 psycopg2 = "*"
 django = "*"
 djangorestframework = "*"
 pylint-django = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

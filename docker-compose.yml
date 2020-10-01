@@ -1,0 +1,14 @@
+version: '3.0'
+services:
+  nginx:
+    image: simon1000/trackernginx:latest
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - carbontracker 
+  carbontracker:
+    image: simon1000/carbontracker:latest
+    build: ./trackerproject
+    ports:
+      - 8080:8080

@@ -25,7 +25,12 @@ SECRET_KEY = '8vuimd0-*^^w26hvq9!9s8o5gj*)*24s+r+w#2xhfjj+&ozw^b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost", 
+     "0.0.0.0", 
+     "192.168.99.100",
+     "carbon-tracker.co.uk"
+]
 
 
 # Application definition
