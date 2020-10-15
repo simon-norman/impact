@@ -17,6 +17,6 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t simon1000/carbontracker:$TAG .
+          docker build -t simon1000/carbontracker:$TAG ./trackerproject
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push simon1000/carbontracker:$TAG
