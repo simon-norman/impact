@@ -9,9 +9,6 @@ spec:
     - http:
         paths:
           - path: /
-            pathType: Prefix
             backend:
-              service:
-                name: server-cluster-ip-service
-                port:
-                  number: 8080
+              serviceName: server-cluster-ip
+              servicePort: 8080
