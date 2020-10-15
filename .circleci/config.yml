@@ -18,5 +18,5 @@ jobs:
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t simon1000/carbontracker:$TAG ./trackerproject
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          echo $DOCKERHUB_PASSWORD | docker login -u simon-norman --password-stdin
           docker push simon1000/carbontracker:$TAG
