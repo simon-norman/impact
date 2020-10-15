@@ -1,12 +1,17 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     - http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: server-cluster-ip
-              servicePort: 8080
+              service:
+                name: server-cluster-ip-service
+                port:
+                  number: 8080
