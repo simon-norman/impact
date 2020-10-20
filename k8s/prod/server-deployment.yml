@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: simon1000/carbontracker
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: trackerproject.settings.prod
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: DB_PASSWORD
+          ports:
+            - containerPort: 8080
