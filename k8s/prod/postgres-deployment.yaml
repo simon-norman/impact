@@ -31,5 +31,5 @@ spec:
                 secretKeyRef:
                   name: db-password
                   key: DB_PASSWORD
-              name: POSTGRES_DB
+            - name: POSTGRES_DB
               value: carbontracker
