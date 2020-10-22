@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from rest_framework import status
 import logging
 
+class HealthCheck(APIView):
+    def get():
+        return Response('Successful')
 class LocationList(APIView):
     def post(self, request, format=None):
         print(request.headers)

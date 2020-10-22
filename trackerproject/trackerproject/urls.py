@@ -20,4 +20,5 @@ from .trackerapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('locations/', views.LocationList.as_view()),
+    path('/'), 
 ]
