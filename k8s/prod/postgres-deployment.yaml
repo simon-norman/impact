@@ -33,3 +33,5 @@ spec:
                   key: DB_PASSWORD
             - name: POSTGRES_DB
               value: carbontracker
+            - name: POSTGRES_USER
+              value: carbontracker
