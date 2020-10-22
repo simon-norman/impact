@@ -5,10 +5,12 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+import logging
 
 class LocationList(APIView):
     def post(self, request, format=None):
         print(request.headers)
+        logging.warning(request.headers)
         serializer = LocationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
