@@ -2,11 +2,7 @@ from .common import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "0.0.0.0",
-    "10.128.0.29"
-]
+ALLOWED_HOSTS = [os.environ['HOST_IP']]
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
