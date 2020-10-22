@@ -12,6 +12,7 @@ spec:
       labels:
         component: server
     spec:
+      hostname: carbon-tracker
       containers:
         - name: server
           image: simon1000/carbontracker
