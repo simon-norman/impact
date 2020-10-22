@@ -8,7 +8,7 @@ from rest_framework import status
 
 class LocationList(APIView):
     def post(self, request, format=None):
-        print request.headers
+        print(request.headers)
         serializer = LocationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
