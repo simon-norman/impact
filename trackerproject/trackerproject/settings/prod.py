@@ -2,7 +2,7 @@ from .common import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('HOST_IP')]
+ALLOWED_HOSTS = ['carbon-tracker']
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
