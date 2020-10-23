@@ -27,6 +27,7 @@ jobs:
           docker push simon1000/carbontracker:$TAG
           docker image tag simon1000/carbontracker:$TAG simon1000/carbontracker:latest
           docker push simon1000/carbontracker:latest
+          kubectl delete jobs/serverbuild
           kubectl apply -f k8s/prod
-          kubectl wait --for=condition=complete job/server-build
+          kubectl wait --for=condition=complete job/serverbuild
           kubectl set image deployments/server-deployment server=simon1000/carbontracker:$TAG
