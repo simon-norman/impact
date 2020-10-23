@@ -13,9 +13,9 @@ class HealthCheck(APIView):
         
 class LocationList(APIView):
     def post(self, request, format=None):
-        print(request.headers)
-        logging.warning(request.headers)
-        serializer = LocationSerializer(data=request.data)
+        location = request.data
+        location['timestamp'] = datetime.datetime.fromtimestamp(location['timestamp'])
+        serializer = LocationSerializer(data=location)
         if serializer.is_valid():
             serializer.save()
 
