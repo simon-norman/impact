@@ -3,7 +3,13 @@ kind: Job
 metadata:
   name: server-build
 spec:
+  selector:
+    matchLabels:
+      component: server-build
   template:
+    metadata:
+      labels:
+        component: server-build
     spec:
       containers:
         - name: server-build
