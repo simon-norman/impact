@@ -26,6 +26,5 @@ jobs:
           echo $DOCKERHUB_PASSWORD | docker login -u simon1000 --password-stdin
           docker push simon1000/carbontracker:$TAG
           kubectl apply -f k8s/prod
-          kubectl set image job/server-build server=simon1000/carbontracker:$TAG
           kubectl wait --for=condition=complete job/server-build
           kubectl set image deployments/server-deployment server=simon1000/carbontracker:$TAG
