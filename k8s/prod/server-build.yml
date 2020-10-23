@@ -1,20 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: server-deployment
+  name: serverbuild
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: server
   template:
-    metadata:
-      labels:
-        component: server
     spec:
       containers:
-        - name: server
-          image: simon1000/carbontracker
+        - name: serverbuild
+          image: simon1000/carbontracker:latest
+          command: ["/bin/sh","-c"]
+          args: ["python manage.py makemigrations && python manage.py migrate"]
           env:
             - name: DJANGO_SETTINGS_MODULE
               value: trackerproject.settings.prod
@@ -23,10 +18,6 @@ spec:
                 secretKeyRef:
                   name: django-secret
                   key: DJANGO_SECRET
-            - name: HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
             - name: DB_HOST
               value: postgres-cluster-ip-service
             - name: PYTHONUNBUFFERED
@@ -36,5 +27,4 @@ spec:
                 secretKeyRef:
                   name: db-password
                   key: DB_PASSWORD
-          ports:
-            - containerPort: 8080
+      restartPolicy: Never

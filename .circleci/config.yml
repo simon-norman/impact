@@ -14,16 +14,25 @@ jobs:
           version: 19.03.13
           docker_layer_caching: false
 
+      # connect to gcloud
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
           gcloud --quiet config set project impact-284220
           gcloud --quiet config set compute/zone us-central1-c
           gcloud container clusters get-credentials carbon-tracker
 
+      # build app image 
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t simon1000/carbontracker:$TAG ./trackerproject
           echo $DOCKERHUB_PASSWORD | docker login -u simon1000 --password-stdin
           docker push simon1000/carbontracker:$TAG
-          kubectl apply -f k8s/prod
+          docker image tag simon1000/carbontracker:$TAG simon1000/carbontracker:latest
+          docker push simon1000/carbontracker:latest
+
+      # run migration job and set app to pull latest image
+      - run: |
+          kubectl delete jobs/serverbuild
+          kubectl apply -f k8s/prod/server-build.yml
+          kubectl wait --for=condition=complete job/serverbuild
           kubectl set image deployments/server-deployment server=simon1000/carbontracker:$TAG
