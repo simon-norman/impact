@@ -1,18 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: server-build
+  name: serverbuild
 spec:
-  selector:
-    matchLabels:
-      component: server-build
   template:
-    metadata:
-      labels:
-        component: server-build
     spec:
       containers:
-        - name: server-build
+        - name: serverbuild
           image: simon1000/carbontracker:latest
           command: ["/bin/sh","-c"]
           args: ["python manage.py makemigrations && python manage.py makemigrations"]
@@ -34,4 +28,3 @@ spec:
                   name: db-password
                   key: DB_PASSWORD
       restartPolicy: Never
-  backoffLimit: 4
