@@ -26,8 +26,6 @@ jobs:
           echo $DOCKERHUB_PASSWORD | docker login -u simon1000 --password-stdin
           docker push simon1000/carbontracker:$TAG
           kubectl apply -f k8s/prod
-          kubectl set image deployments/server-build server=simon1000/carbontracker:$TAG
-          SERVER_BUILD_POD=$(kubectl get pod -l component=server-build -o jsonpath="{.items[0].metadata.name}")
-          kubectl exec $SERVER_BUILD_POD python manage.py makemigrations
-          kubectl exec $SERVER_BUILD_POD python manage.py migrate
+          kubectl set image job/server-build server=simon1000/carbontracker:$TAG
+          kubectl wait --for=condition=complete job/server-build
           kubectl set image deployments/server-deployment server=simon1000/carbontracker:$TAG
