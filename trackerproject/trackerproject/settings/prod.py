@@ -2,7 +2,7 @@ from .common import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['carbon-tracker.co.uk']
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
