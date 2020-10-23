@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: server-build
-          image: simon1000/carbontracker
+          image: simon1000/carbontracker:latest
           command: ["/bin/sh","-c"]
           args: ["python manage.py makemigrations && python manage.py makemigrations"]
           env:
