@@ -30,3 +30,5 @@ class JourneyCalculator:
                     location.journey_id = new_journey.journey_id
                     location.save()
                     last_journey_location = location
+            else
+                location.journey_id
