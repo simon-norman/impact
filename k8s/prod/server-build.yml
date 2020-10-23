@@ -4,9 +4,6 @@ metadata:
   name: server-build
 spec:
   template:
-    metadata:
-      labels:
-        component: server-build
     spec:
       containers:
         - name: server-build
