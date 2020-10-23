@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: server-build
+spec:
+  template:
+    metadata:
+      labels:
+        component: server-build
+    spec:
+      containers:
+        - name: server-build
+          image: simon1000/carbontracker
+          env:
+            - name: DJANGO_SETTINGS_MODULE
+              value: trackerproject.settings.prod
+            - name: SECRET_KEY
+              valueFrom: 
+                secretKeyRef:
+                  name: django-secret
+                  key: DJANGO_SECRET
+            - name: DB_HOST
+              value: postgres-cluster-ip-service
+            - name: PYTHONUNBUFFERED
+              value: 1
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: DB_PASSWORD
+      restartPolicy: Never
+  backoffLimit: 4
