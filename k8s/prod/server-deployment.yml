@@ -26,6 +26,8 @@ spec:
                   key: DJANGO_SECRET
             - name: DB_HOST
               value: postgres-cluster-ip-service
+            - name: PYTHONUNBUFFERED
+              value: 1
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
